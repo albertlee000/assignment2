@@ -2,24 +2,24 @@
   <form @submit.prevent="submit">
     <div class="form-group" :class="{ 'form-group--error': $v.bookname.$error }">
       <label class="form-control-label">Book Name</label>
-      <input class="form__input" placeholder="book name" v-model.trim='bookname'/>
+      <input data-test="inputbook" class="form__input" placeholder="book name" v-model.trim='bookname'/>
     </div>
     <div class="error" v-if="!$v.bookname.required">Book name is Required</div>
     <div class="error" v-if="!$v.bookname.minLength">Book name must have at least {{$v.bookname.$params.minLength.min}} letters.</div>
     <div class="form-group" :class="{ 'form-group--error': $v.author.$error }">
       <label class="form__label">Author</label>
-      <input class="form__input" placeholder="author name" v-model.trim='author'/>
+      <input data-test="inputauthor" class="form__input" placeholder="author name" v-model.trim='author'/>
     </div>
     <div class="error" v-if="!$v.author.required">Author is Required</div>
     <div class="error" v-if="!$v.author.minLength">Author must have at least {{$v.author.$params.minLength.min}} letters.</div>
     <div class="form-group" :class="{ 'form-group--error': $v.summary.$error }">
       <label class="form__label">Summary</label>
-      <input class="form__input" placeholder="describe this book" v-model.trim='summary'/>
+      <input data-test="inputsummary" class="form__input" placeholder="describe this book" v-model.trim='summary'/>
     </div>
     <div class="error" v-if="!$v.summary.required">Summary is Required</div>
     <div class="error" v-if="!$v.summary.minLength">Summary must have at least {{$v.summary.$params.minLength.min}} letters.</div>
     <p>
-      <button class="btn btn-primary btn1" type="submit" :disabled="submitStatus === 'PENDING'">{{ bookBtnTitle }}</button>
+      <button data-test="summitbtn" class="btn btn-primary btn1" type="submit" :disabled="submitStatus === 'PENDING'">{{ bookBtnTitle }}</button>
     </p>
     <p>
       <a href="#/books" class="btn btn-primary btn1" role="button">Manage Book</a>
