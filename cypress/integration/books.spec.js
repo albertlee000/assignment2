@@ -13,7 +13,7 @@ describe('Login and Book operations', () => {
   //add a new book for deleting
   it('should add a book for deleting ', function () {
     cy.get('[data-test=addbtn] > .nav-link > .fa').click()
-    cy.wait(5000)
+    cy.wait(20000)
     cy.get(':nth-child(1) > .form__input').type('sun&beach')
     cy.wait(5000)
     cy.get(':nth-child(2) > .form__input').type('asdad')
@@ -26,7 +26,7 @@ describe('Login and Book operations', () => {
   //delete the new book
   it('delete a book', () => {
     cy.visit('http://localhost:8081/#/books')
-    cy.wait(10000)
+    cy.wait(20000)
     cy.get(':nth-child(10) > :nth-child(2)').should('contain','sun&beach')
     cy.wait(5000)
     cy.get(':nth-child(10) > :nth-child(3)').should('contain','asdad')
