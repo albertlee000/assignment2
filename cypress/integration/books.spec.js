@@ -12,6 +12,7 @@ describe('Login and Book operations', () => {
   });
   //add a new book for deleting
   it('should add a book for deleting ', function () {
+    cy.get('[data-test=addbtn] > .nav-link > .fa').click()
     cy.wait(5000)
     cy.get(':nth-child(1) > .form__input').type('sun&beach')
     cy.wait(5000)
