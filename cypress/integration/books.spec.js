@@ -12,6 +12,7 @@ describe('Login and Book operations', () => {
   });
   //add a new book for deleting
   it('should add a book for deleting ', function () {
+    cy.get('[data-test=addbtn] > .nav-link > .fa').click()
     cy.wait(3000)
     cy.get('.form-control-label').next().type('sun&beach')
     // cy.get('[data-test=inputbook]').type()
@@ -25,7 +26,7 @@ describe('Login and Book operations', () => {
   });
   //delete the new book
   it('delete a book', () => {
-    cy.visit('http://localhost:8081/#/books')
+    cy.get(':nth-child(1) > :nth-child(2) > .nav-link > .fa').click()
     cy.wait(3000)
     cy.get(':nth-child(10) > :nth-child(2)').should('contain','sun&beach')
 
