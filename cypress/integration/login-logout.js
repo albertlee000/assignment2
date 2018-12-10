@@ -10,6 +10,7 @@ describe('Login and Logout', () => {
       .type('123456')
     cy.get('.el-button').click()
     cy.get('[data-test=addbtn] > .nav-link > .fa').click()
+    cy.get('.el-notification__content > p').should('contain','Welcome you,')
     cy.visit('http://localhost:8081/#/books')
   })
   it('logout',()=>{

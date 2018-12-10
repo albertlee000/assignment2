@@ -12,30 +12,30 @@ describe('Login and Book operations', () => {
   });
   //add a new book for deleting
   it('should add a book for deleting ', function () {
-    cy.wait(5000)
+    cy.wait(30000)
     cy.get('[data-test=inputbook]').type('sun&beach')
-    cy.wait(5000)
+
     cy.get('[data-test=inputauthor]').type('asdad')
-    cy.wait(5000)
+
     cy.get('[data-test=inputsummary]').type('qwdhiasdihasd')
-    cy.wait(5000)
+
     cy.get('[data-test=summitbtn]').click()
-    cy.wait(3000)
+
   });
   //delete the new book
   it('delete a book', () => {
     cy.visit('http://localhost:8081/#/books')
-    cy.wait(5000)
+    cy.wait(30000)
     cy.get(':nth-child(10) > :nth-child(2)').should('contain','sun&beach')
-    cy.wait(5000)
+
     cy.get(':nth-child(10) > :nth-child(3)').should('contain','asdad')
-    cy.wait(5000)
+
     cy.get(':nth-child(10) > :nth-child(4)').should('contain','qwdhiasdihasd')
-    cy.wait(5000)
+
     cy.get(':nth-child(10) > :nth-child(6) > .fa').click()
-    cy.wait(1500)
+
     cy.get('.swal2-confirm').click()
-    cy.wait(1500)
+
     cy.get('.swal2-confirm').click()
   });
 
