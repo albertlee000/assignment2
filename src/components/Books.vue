@@ -3,9 +3,10 @@
     <h3 class="vue-title"><i class="fa fa-list" style="padding: 3px"></i>{{messagetitle}}</h3>
     <div id="app1">
       <v-client-table :columns="columns" :data="books" :options="options">
-        <!--<a slot="like" slot-scope="props" class="fa fa-thumbs-up fa-2x" @click="upvote(props.row._id)"></a>-->
+        <a slot="thumbup" slot-scope="props" class="fa fa-thumbs-up fa-2x" @click="thumbUp(props.row.name)"></a>
+        <a slot="thumbdown" slot-scope="props" class="fa fa-thumbs-down fa-2x" @click="thumbDown(props.row.name)"></a>
         <a slot="remove" slot-scope="props" class="fa fa-trash-o fa-2x" @click="deleteBook(props.row._id)"></a>
-        <!--<a slot="edit" slot-scope="props" class="fa fa-edit fa-2x" @click="editDonation(props.row._id)"></a>-->
+        <a slot="edit" slot-scope="props" class="fa fa-edit fa-2x" @click="jumpToEdit(props.row._id)"></a>
       </v-client-table>
     </div>
   </div>
@@ -15,7 +16,9 @@
   import BookService from '@/services/bookservice'
   import Vue from 'vue'
   import VueTables from 'vue-tables-2'
-
+  import loginUser from '@/components/Login'
+  import Vuex from 'vuex'
+  Vue.use(Vuex)
   Vue.use(VueTables.ClientTable, {compileTemplates: true, filterByColumn: true})
   export default {
     name: 'Books',
@@ -23,9 +26,11 @@
       return {
         books: [],
         errors: [],
-        props: ['_id'],
+        uid:[],
+
+        props: ['_id','name'],
         messagetitle: ' Book List ',
-        columns: ['_id', 'name', 'author', 'summary', 'like','remove', 'review'],
+        columns: ['_id', 'name', 'author', 'summary', 'like','thumbup','thumbdown','remove', 'edit','review'],
         options: {
           perPage: 10,
           filterable: ['name', 'author', '_id'],
@@ -35,6 +40,8 @@
             author: 'Author',
             summary: 'Summary',
             like: 'Likes',
+            thumbup:'Thumb Up',
+            thumbdown:'Thumb Down',
             review: 'Review'
           }
         }
@@ -50,24 +57,51 @@
           .then(response => {
             // JSON responses are automatically parsed.
             this.books = response.data
-            console.log(this.books)
+
           })
           .catch(error => {
             this.errors.push(error)
             console.log(error)
           })
       },
-      // upvote: function (id) {
-      //   DonationService.upvoteDonation(id)
-      //     .then(response => {
-      //       this.loadDonations()
-      //       console.log(response)
-      //     })
-      //     .catch(error => {
-      //       this.errors.push(error)
-      //       console.log(error)
-      //     })
-      // },
+      jumpToEdit:function(id){
+        this.$router.push({path: './editBook',query:{id:id}})
+
+      },
+      thumbUp: function (name) {
+        var username = loginUser.getUserName()
+        var bookname = {bookname:name}
+        BookService.getUserID(username)
+          .then(response=>{
+            this.uid = response.data
+            BookService.like(this.uid,bookname)
+              .then(response => {
+                this.loadBooks()
+                console.log(response)
+              })
+              .catch(error => {
+                this.errors.push(error)
+                console.log(error)
+              })
+          })
+      },
+      thumbDown: function (name) {
+        var username = loginUser.getUserName()
+        var bookname = {bookname:name}
+        BookService.getUserID(username)
+          .then(response=>{
+            this.uid = response.data
+            BookService.unlike(this.uid,bookname)
+              .then(response => {
+                this.loadBooks()
+                console.log(response)
+              })
+              .catch(error => {
+                this.errors.push(error)
+                console.log(error)
+              })
+          })
+      },
       rankBook: function () {
         BookService.rankBook
           .then(response => {
@@ -123,7 +157,7 @@
 
 <style scoped>
   #app1 {
-    width: 60%;
+    width: 80%;
     margin: 0 auto;
   }
   .vue-title {

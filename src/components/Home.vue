@@ -1,5 +1,5 @@
 <template>
-  <div class="hero">
+  <div id="app1" class="hero">
     <h1 class="vue-title">World of Book</h1>
 
     <table align="center">

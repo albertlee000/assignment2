@@ -1,5 +1,5 @@
 <template>
-  <div class = "hero">
+  <div id="app1" class="hero">
     <div class = "loginFrame">
       <el-form ref = "loginForm" :model = "user" :rules = "rules" status-icon label-position = "left" label-width = "0px" class = "login-container">
         <el-form-item label="Username" prop = "name">
@@ -26,8 +26,13 @@
 
   Vue.use(Vuex);
   let users = [];
+  var account;
+  var loginStatus = false;
   export default {
     name: 'Login',
+    getUserName:function () {
+      return account
+    },
     data() {
       return {
         user:{},
@@ -52,13 +57,14 @@
     methods: {
       login: function () {
         this.$refs.loginForm.validate((valid) => {
-          var flag = false
           if (valid) {
             for(var i =0;i<this.users.length;i++) {
-              if (this.user.name === this.users[i].account && this.user.pw === this.users[i].psw)
-                flag = true
+              if (this.user.name === this.users[i].account && this.user.pw === this.users[i].psw) {
+                loginStatus = true
+                account = this.user.name
+              }
             }
-            if (flag === true) {
+            if (loginStatus === true) {
               this.$notify({
                 type: 'success',
                 message: 'Welcome you,' + this.user.name + '!',
@@ -67,7 +73,6 @@
               this.$router.replace('/home')
               this.$store.commit('$_setStorage', {currentUser: this.user.name})
               this.$store.commit('$_setLogin', '1')
-
             }
             else {
               this.$message({
@@ -76,7 +81,6 @@
                 showClose: true
               })
             }
-
           }
           else{
             return false

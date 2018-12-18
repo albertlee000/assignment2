@@ -24,7 +24,7 @@
     <p>
       <a href="#/books" class="btn btn-primary btn1" role="button">Manage Book</a>
     </p>
-    <p class="typo__p" v-if="submitStatus === 'OK'" style="color:white">Thanks for your share!</p>
+    <p class="typo__p" v-if="submitStatus === 'OK'" style="color:white">Thanks for your sharing!</p>
     <p class="typo__p" v-if="submitStatus === 'ERROR'" style="color:white">Please Fill in the Form Correctly.</p>
     <p class="typo__p" v-if="submitStatus === 'PENDING'" style="color:white">Uploading...</p>
   </form>

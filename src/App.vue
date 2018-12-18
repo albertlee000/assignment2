@@ -9,12 +9,11 @@
           <b-nav-item to="/home"><i class="fa fa-home" style="padding: 5px" > Home</i></b-nav-item>
           <b-nav-item to="/books"><i class="fa fa-list" style="padding: 5px"> Manage Books</i></b-nav-item>
           <b-nav-item data-test="addbtn" to="/addbook"><i class="fa fa-book" style="padding: 5px"> Add Book</i></b-nav-item>
+          <b-nav-item to="/map"><i class="fa fa-globe" style="padding: 5px"> Map</i></b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
 
           <b-nav-item to="/login" ><i class="fa fa-sign-in" style="padding: 5px"> Login </i></b-nav-item>
-
-
           <b-nav-item to="/home" ><i class="fa fa-sign-out" style="padding: 5px" @click="logout"> Logout </i></b-nav-item>
 
           <i class="fa fa-pied-piper-alt fa-1x" style="padding: 5px; color: white;"></i>
@@ -33,10 +32,17 @@
     methods:{
       logout:function () {
         this.$store.commit('$_removeStorage')
+
       },
       isLogin:function () {
-        console.log(this.gettStorage)
-        return this.gettStorage
+        console.log(this.getStorage)
+        return this.getStorage
+      }
+    },
+    mounted(){
+      window.onbeforeunload = function () {
+        var storage = window.localStorage;
+        storage.clear()
       }
     }
   }

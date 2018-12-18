@@ -10,12 +10,17 @@ import VueSweetalert2 from 'vue-sweetalert2'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './../store/index'
-
+import * as VueGoogleMaps from 'vue2-google-maps'
 Vue.use(ElementUI)
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 Vue.use(VueSweetalert2)
-/* eslint-disable no-new */
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyA8ZGtkyIZyYIsa_vHm5tJJDTnfWQHAQug',
+    libraries: 'places'
+  }
+})
 new Vue({
   el: '#app',
   router,

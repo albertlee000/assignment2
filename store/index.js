@@ -18,6 +18,9 @@ const store = new Vuex.Store({
         state.isLogin = localStorage.getItem(isLogin)
       }
       return state.isLogin
+    },
+    getUser:function () {
+      return state.currentUser
     }
   },
   mutations: {
