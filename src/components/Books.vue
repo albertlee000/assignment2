@@ -30,7 +30,7 @@
 
         props: ['_id','name'],
         messagetitle: ' Book List ',
-        columns: ['_id', 'name', 'author', 'summary', 'like','thumbup','thumbdown','remove', 'edit','review'],
+        columns: ['_id', 'name', 'author', 'summary', 'like','thumbup','thumbdown','remove', 'edit'],
         options: {
           perPage: 10,
           filterable: ['name', 'author', '_id'],
@@ -41,8 +41,8 @@
             summary: 'Summary',
             like: 'Likes',
             thumbup:'Thumb Up',
-            thumbdown:'Thumb Down',
-            review: 'Review'
+            thumbdown:'Thumb Down'
+
           }
         }
       }
