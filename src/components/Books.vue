@@ -122,7 +122,7 @@
           confirmButtonText: 'Yes',
           cancelButtonText: 'No',
           showCloseButton: true
-          // showLoaderOnConfirm: true
+
         }).then((result) => {
           console.log('SWAL Result : ' + result.value)
           if (result.value === true) {
@@ -145,12 +145,8 @@
             this.$swal('Cancelled', 'Book still exists!', 'info')
           }
         })
-      },
+      }
 
-      // editDonation: function (id) {
-      //   this.$router.params = id
-      //   this.$router.push('edit')
-      // }
     }
   }
 </script>
