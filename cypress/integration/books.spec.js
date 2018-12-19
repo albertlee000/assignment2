@@ -32,7 +32,7 @@ describe('Login and Book operations', () => {
 
     cy.get(':nth-child(10) > :nth-child(4)').should('contain','a book')
 
-    cy.get(':nth-child(10) > :nth-child(6) > .fa').click()
+    cy.get(':nth-child(10) > :nth-child(8)').click()
 
     cy.get('.swal2-confirm').click()
     cy.wait(2000)
