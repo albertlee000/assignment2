@@ -14,7 +14,7 @@ script:
 deploy:
   provider: surge
   skip_cleanup: true
-  domain: your-domain.surge.sh
+  domain: foolish-breath.surge.sh
   project: ./dist
   on:
     branch: master
